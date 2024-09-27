@@ -13,8 +13,3 @@ class Stake(Base):
     daily_change_percent = Column(Float)
     stock_turnover = Column(Integer)
 
-
-
-
-
-
