@@ -25,5 +25,13 @@
 
 Preview the App at http://127.0.0.1:8000/ and the out-of-the-box [API Documentation](http://127.0.0.1:8000/docs)
 
+### signing in
+all the endpoints are 'authorized only' , therefore you need to log-in and get your jwt credential before using any endpoint.
+
+default user:pass choosed for this project are as stated below
+
+username: ```johndoe```
+password: ```123456```
+
 
 made with 🔥
