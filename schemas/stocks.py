@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class AddNewStakeSchema(BaseModel):
+class AddNewStockSchema(BaseModel):
     company_name: str
     ticker: str
     current_price: int
@@ -11,7 +11,7 @@ class AddNewStakeSchema(BaseModel):
     stock_turnover: int
 
 
-class UpdateStakeSchema(BaseModel):
+class UpdateStockSchema(BaseModel):
     company_name: Optional[str] = None
     ticker: Optional[str] = None
     current_price: Optional[int] = None
@@ -19,7 +19,7 @@ class UpdateStakeSchema(BaseModel):
     stock_turnover: Optional[int] = None
 
 
-class StakeSchema(BaseModel):
+class StockSchema(BaseModel):
     id: int
     company_name: str
     ticker: str

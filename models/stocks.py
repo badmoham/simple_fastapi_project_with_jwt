@@ -2,9 +2,9 @@ from sqlalchemy import Column, Integer, String, Float
 from db import Base
 
 
-class Stake(Base):
-    """ models holding stake related information """
-    __tablename__ = "stakes"
+class Stock(Base):
+    """ models holding stock related information """
+    __tablename__ = "stocks"
 
     id = Column(Integer, primary_key=True, index=True)
     company_name = Column(String)
