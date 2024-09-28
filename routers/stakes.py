@@ -13,8 +13,11 @@ router = APIRouter()
 
 
 @router.post("/add_stake", status_code=status.HTTP_201_CREATED,
-             responses={400: {"description": "Bad Request",
-                              "content": {"application/json": {"example": {"detail": "ticker already exist"}}}}})
+             responses={
+                 401: {"description": "unauthorized",
+                       "content": {"application/json": {"example": {"detail": "Not authenticated"}}}},
+                 400: {"description": "Bad Request",
+                       "content": {"application/json": {"example": {"detail": "ticker already exist"}}}}})
 async def add_stake(current_user: Annotated[User, Depends(get_current_active_user)],
                     request: AddNewStakeSchema, db: Session = Depends(get_db)) -> StakeSchema:
     """ used to add new stake to database """
@@ -29,8 +32,11 @@ async def add_stake(current_user: Annotated[User, Depends(get_current_active_use
 
 
 @router.get("/get_stake/{stake_ticker}",
-            responses={404: {"description": "not found",
-                             "content": {"application/json": {"example": {"detail": "Item not found"}}}}})
+            responses={
+                401: {"description": "unauthorized",
+                      "content": {"application/json": {"example": {"detail": "Not authenticated"}}}},
+                404: {"description": "not found",
+                      "content": {"application/json": {"example": {"detail": "Item not found"}}}}})
 async def get_stake(current_user: Annotated[User, Depends(get_current_active_user)],
                     stake_ticker: str, db: Session = Depends(get_db)) -> StakeSchema:
     """ used to get all information about a stake form database """
@@ -43,6 +49,8 @@ async def get_stake(current_user: Annotated[User, Depends(get_current_active_use
 @router.put("/update_stake/{stake_id}",
             responses={
                 200: {"description": "updated successfully"},
+                401: {"description": "unauthorized",
+                      "content": {"application/json": {"example": {"detail": "Not authenticated"}}}},
                 404: {"description": "not found",
                       "content": {"application/json": {"example": {"detail": "Item not found"}}}}
             })
@@ -67,6 +75,8 @@ async def update_stake(current_user: Annotated[User, Depends(get_current_active_
                responses={
                    200: {"description": "deleted successfully", "content": {
                        "application/json": {"example": {"message": "stake AbCd_company got deleted successfully."}}}},
+                   401: {"description": "unauthorized",
+                         "content": {"application/json": {"example": {"detail": "Not authenticated"}}}},
                    404: {"description": "not found",
                          "content": {"application/json": {"example": {"detail": "Item not found"}}}}
                }
@@ -83,7 +93,9 @@ async def delete_stake(current_user: Annotated[User, Depends(get_current_active_
         raise HTTPException(status_code=404, detail="Item not found")
 
 
-@router.get("/stake_list/")
+@router.get("/stake_list/",
+            responses={401: {"description": "unauthorized",
+                             "content": {"application/json": {"example": {"detail": "Not authenticated"}}}}})
 async def get_stake_list(
         current_user: Annotated[User, Depends(get_current_active_user)],
         company_name: str = Query(None, description="Filter by company name"),
