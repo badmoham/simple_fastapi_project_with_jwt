@@ -21,7 +21,7 @@
 
 6. To run the app, with uvicorn using the file_name:app_instance
 
-     > uvicorn app:app
+     > uvicorn main:app --reload
 
 Preview the App at http://127.0.0.1:8000/ and the out-of-the-box [API Documentation](http://127.0.0.1:8000/docs)
 
